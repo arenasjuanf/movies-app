@@ -1,0 +1,93 @@
+<ion-content>
+  <ion-label>
+    <h1 class="titulo">
+      {{ details?.title | titlecase  }}
+    </h1>
+  </ion-label>
+
+
+  <img [src]="details?.backdrop_path | imagen" alt="">
+
+  <ion-grid>
+    <ion-row class="default">
+      <ion-col size="4" class="poster-detalle-sobre">
+        <ion-card class="poster">
+          <img [src]="details?.poster_path | imagen" >
+        </ion-card>
+        
+      </ion-col>
+      <ion-col size="8">
+        <ion-item>
+          <ion-icon slot="start" name="thumbs-up" color="primary"></ion-icon>
+          <ion-label>Rating</ion-label>
+          <ion-note slot="end" color="primary">
+            {{ details?.vote_average }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="people-outline" color="primary"></ion-icon>
+          <ion-label>Votos</ion-label>
+          <ion-note slot="end" color="primary">
+            {{ details?.vote_count }}
+          </ion-note>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>
+          {{ details?.overview | slice: 0 : ( hide ?  150 : details?.overview?.length  ) }} {{ hide ? "..." : "" }}
+        </ion-label>
+        <ion-label color="primary" (click)="hide = !hide"> {{ hide ? 'Show more' :  'Show less' }} </ion-label>
+      </ion-col>
+    </ion-row>  
+    <ion-row>
+      <ion-col size="12">
+        <ion-chip color="primary"  *ngFor="let genre of details?.genres">
+          <ion-label>{{ genre.name }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>Actores</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-slides [options]="slideOpts">
+    <ion-slide *ngFor="let actor of actors">
+      <ion-card class="card-actor">
+        <img [src]="actor.profile_path ? (actor.profile_path | imagen) : './assets/no-avatar.jpg' ">
+        <ion-label class="actor-name">
+          {{  actor.name }}
+        </ion-label>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="start" name="arrow-back-outline" ></ion-icon>
+        <ion-label>Back</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button >
+        <ion-icon slot="end" name="star-outline" (click)="back()"></ion-icon>
+        <ion-label>Favorite</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
