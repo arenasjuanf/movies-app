@@ -24,7 +24,6 @@ export class MoviesService {
   }
 
   getFeature(){
-
     const today = new Date();
     const lastDay = new Date( today.getFullYear(), today.getMonth() + 1, 0 ).getDate();
     const mes = today.getMonth();
@@ -35,11 +34,8 @@ export class MoviesService {
       mesString = mes;
     }
 
-
     const start = `${today.getFullYear()}-${mesString}-01`;
     const end = `${today.getFullYear()}-${mesString}-${lastDay}`;
-
-
     return this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=${start}&primary_release_date.lte=${end}`);
   }
 
@@ -53,6 +49,10 @@ export class MoviesService {
 
   getActores(id: string){
     return this.ejecutarQuery<actorsResponse>(`/movie/${id}/credits?a=1`)
+  }
+
+  searchMovie(text:string){
+    return this.ejecutarQuery<actorsResponse>(`/search/movie?query=${text}`)
   }
 
 }
