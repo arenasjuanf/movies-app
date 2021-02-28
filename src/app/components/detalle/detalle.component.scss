@@ -16,6 +16,7 @@
 }
 
 .titulo {
+    margin: 0px;
     width: 100%;
     position: absolute;
     color: white;
@@ -38,6 +39,7 @@
 
 .card-actor {
     height: 190px;
+    border: 1px solid #2c2a2a;
 }
 
 .actor-name {

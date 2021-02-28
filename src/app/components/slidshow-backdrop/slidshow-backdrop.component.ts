@@ -22,7 +22,6 @@ export class SlidshowBackdropComponent implements OnInit {
 
 
   async showDetail(id){
-    console.log(id);
     const modal = await this.modalCtrl.create({
       component: DetalleComponent,
       mode: 'ios',
