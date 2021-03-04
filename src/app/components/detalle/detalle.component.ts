@@ -13,12 +13,12 @@ export class DetalleComponent implements OnInit {
   details: movieDetail;
   actors: any;
   hide = true;
-
+  exist: boolean;
   slideOpts = {
     slidesPerView: 3.3,
     freeMode: false
   };
-
+  
   constructor(
     private moviesService: MoviesService,
     private modalctrl : ModalController,
@@ -27,6 +27,9 @@ export class DetalleComponent implements OnInit {
   @Input('id') id;
 
   ngOnInit() {
+
+    this.searchMovie();
+
     this.moviesService.getMovieDetails(this.id).subscribe((details: movieDetail) => {
       this.details = details
     });
@@ -35,12 +38,18 @@ export class DetalleComponent implements OnInit {
     });
   }
 
+  async searchMovie(){
+    this.exist = await this.dataLocalService.movieExist( this.id );
+  }
+
   async back(){
     await this.modalctrl.dismiss()
   }
 
   favorite(){
-    this.dataLocalService.saveMovie(this.details);
+    this.dataLocalService.saveMovie(this.details).then(() => {
+      this.searchMovie();
+    }) ;
   }
 
 }

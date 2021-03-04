@@ -55,4 +55,8 @@ export class MoviesService {
     return this.ejecutarQuery<actorsResponse>(`/search/movie?query=${text}`)
   }
 
+  getGenres(){
+    return this.ejecutarQuery<actorsResponse>(`/genre/movie/list?a=1`);
+  }
+
 }
