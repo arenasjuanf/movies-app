@@ -13,7 +13,7 @@ import { DetalleComponent } from '../components/detalle/detalle.component';
 export class Tab2Page {
 
   textoBuscar:string = ""
-  ideas: string[] = ['Spiderman', 'Baby driver', 'Lord of rings', 'Avengers']
+  ideas: string[] = ['Spiderman', 'Naruto', 'Lord of rings', 'Avengers']
   movies: Pelicula[] = [];
   loading = false;
   constructor(
